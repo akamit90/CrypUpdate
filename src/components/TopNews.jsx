@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
-import loadingGif from '../assets/loading.gif';
 
 function Responsive({loading,setLoading}) {
   const sliderRef = useRef(null);
@@ -60,7 +59,7 @@ function Responsive({loading,setLoading}) {
           }
         );
         setNewsItem(response.data);
-        setLoading(false);
+        // setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error.message);
       }
@@ -71,16 +70,11 @@ function Responsive({loading,setLoading}) {
 
   return (
     <div className="slider-container relative px-8">
-<h1 className=' text-center text-1xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3'>
+    <h1 className=' text-center text-1xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3'>
         Trending News
         </h1>
-        {loading ? (
-        <div className="flex justify-center items-center">
-          <img src={loadingGif} alt="Loading" />
-        </div>
-      ) : (
+
       <Slider ref={sliderRef} {...settings}>
-        
          {newsItem.map((item, index) => (
              <div key={index} className="lg:w-1/3 md:w-1/2 p-4 w-full">
              <div className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col">
@@ -105,9 +99,9 @@ function Responsive({loading,setLoading}) {
              </div>
            </div>
             ))}
-
+       
       </Slider>
-      )}
+      
       <button
         className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-gray-800 text-white rounded-full"
         onClick={goToPrev}

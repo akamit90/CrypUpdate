@@ -13,12 +13,13 @@ function App() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`https://openapiv1.coinstats.app/coins?page=${currentPage}&currency=INR`, {
+        const response = await axios.get(`https://openapiv1.coinstats.app/coins?page=${currentPage}&currency=INR&limit=50`, {
           headers: { 'X-API-KEY': 'QSzWoZlIs1tsH5IC2AfUi/BWjQF9pKkRmyBnPoYznhU=' }
         });
         setCurrencies(response.data.result);
@@ -52,6 +53,9 @@ function App() {
     setCurrencies(searchCoin);
 
   };
+  const ScrollToTop=()=>{
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+  }
 
   return (
     <div className='bg-white text-black'>
@@ -70,10 +74,11 @@ function App() {
         totalPages={totalPages} 
         nextPage={nextPage} 
         prevPage={prevPage}
+        ScrollToTop={ScrollToTop}
       />}/>
       <Route path='/news' element={<News/>}/>
       </Routes>
-      <Footer/>
+      <Footer ScrollToTop={ScrollToTop}/>
       </BrowserRouter>
     </div>
   );

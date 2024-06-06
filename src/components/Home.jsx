@@ -12,12 +12,14 @@ function Home({
   totalPages, 
   loading, 
   error, 
-  setLoading
+  ScrollToTop,
+  isSearchActive
 }) 
 {
   return (
     <div className="mx-auto py-4 bg-white-400">
-      <TopNews loading={loading} setLoading={setLoading}/>
+      
+      <TopNews />
       {/* when loading is true */}
       {loading && (
         <div className="flex justify-center items-center">
@@ -28,6 +30,7 @@ function Home({
       {/* when loading is false */}
       {!loading && (
         <div className="overflow-x-auto">
+          
           <table className="min-w-full leading-normal shadow-md rounded-lg overflow-hidden">
             <thead>
               <tr>
@@ -78,12 +81,16 @@ function Home({
             </tbody>
           </table>
           <div className="flex justify-between mt-4">
-            <button onClick={prevPage} className={`flex items-center px-4 py-2 bg-gray-800 text-gray-100 rounded-lg ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}>
+            <button onClick={() => {prevPage();ScrollToTop();}} className={`flex items-center px-4 py-2 bg-gray-800 text-gray-100 rounded-lg ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}>
               <GrLinkPrevious className="mr-2" /> Previous
             </button>
-            <button onClick={nextPage} className={`flex items-center px-4 py-2 bg-gray-800 text-gray-100 rounded-lg ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}>
+            <span className="text-gray-800">Page {currentPage} of {totalPages}</span>
+            <button onClick={() => {nextPage();ScrollToTop();}} 
+              className={`flex items-center px-4 py-2 bg-gray-800 text-gray-100 rounded-lg ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
               Next <GrLinkNext className="ml-2" />
             </button>
+
           </div>
         </div>
       )}

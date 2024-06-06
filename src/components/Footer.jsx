@@ -4,10 +4,8 @@ import { FaInstagram } from "react-icons/fa";
 import { IoLogoTwitter } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 
-function Footer() {
-    const ScrollToTop=()=>{
-      window.scrollTo({ top: 0, behavior: 'smooth' }); 
-    }
+function Footer({ScrollToTop}) {
+    
   return (
     <>
       <footer className='bg-black text-white mt-4'>
